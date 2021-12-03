@@ -1,0 +1,24 @@
+#siteHead{
+    color: $text-muted;
+    margin-bottom: 2rem;
+    &.front-page{
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        z-index: 9;
+    }
+    .paintball{
+        &:before{left: 50%;}
+    }
+    #logo{border-right: 1px solid $border-color;position: relative;}
+    #search-form input:focus{box-shadow: unset;}
+    #navigation .menu{
+        @extend .list-unstyled;
+        display: flex;
+        li{
+            &:not(:last-child){margin-right: 2rem;}
+        }
+    }
+}

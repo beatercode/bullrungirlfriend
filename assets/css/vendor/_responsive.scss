@@ -1,0 +1,96 @@
+@media (max-width: 767.98px){
+    #siteBody{overflow: hidden;}
+    .circle-shadow:before{display: none;}
+    #siteHead #logo{border-right: unset;}
+    #siteFoot{
+        overflow: hidden;
+        .newsletters{
+            padding: 1rem;
+            .btn-style{padding: 0.75rem;}
+        }
+        aside{
+            .menu{display: none;}
+        }
+    }
+}
+@media (max-width: 991.98px){
+    .bg-shape{display: none;}
+    #siteHead #search-form{border: 1px solid map-get($colors, 'primary');border-radius: $border-radius;}
+    #intro{
+        margin-bottom: 24rem;
+        .title{font-size: 18px;}
+        .thumb{transform: translate(-35px,185px);}
+    }
+    #best-offer{
+        margin-bottom: 3rem;
+        .items{flex-direction: column;}
+        .nft-item{
+            .details{
+                text-align: center;
+                .d-flex{justify-content: center;}
+                .btn{width: 130px;}
+            }
+        }
+    }
+    #products{
+        margin-bottom: 25rem;
+        .items{
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden;
+            article{min-width: max-content;}
+        }
+    }
+    #about-us{
+        margin-bottom: 3rem;
+        .paintball{display: none;}
+        .press-two{margin-top: 0;margin-bottom: 3rem;}
+        .thumb{transform: translate(-35px,-240px);}
+    }
+    #history{
+        margin-bottom: 2rem;
+        .items{grid-gap: 4rem;}
+    }
+    #rarity{
+        margin-bottom: 2rem;
+        .title-section{margin-bottom: 25rem!important;}
+        .thumb{transform: translate(0,-220px);}
+        .lists{
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden;     
+            .items{min-width: max-content;}
+        }
+    }
+}
+@media (min-width: 576px) and (max-width: 767.98px){
+
+}
+@media (min-width: 768px) and (max-width: 991.98px){
+    #best-offer .nft-item .thumb{
+        text-align: center;
+        &:before{display: none;}
+    }
+    #products{margin-bottom: 33rem;}
+    #intro{
+        margin-bottom: 37rem;
+        .thumb{transform: translate(-35px,260px);}
+    }
+    #about-us{
+        .thumb{transform: translate(-35px,-330px);}
+    }
+    #rarity{
+        .title-section{margin-bottom: 32rem !important;}
+        .thumb{transform: translate(0, -280px);}
+    }
+    #siteFoot .newsletters{padding: 1rem;}
+}
+@media (min-width: 992px) and (max-width: 1199.98px){
+    #about-us{
+        .paintball{display: none;}
+      .bg-shape:after{right: -180px;}  
+    }
+}
+@media (min-width: 1200px){
+	
+}
