@@ -932,11 +932,12 @@
 
 	const main_ethClassic = 61;
 	const test_polygon = 80001;
+   const chain = test_polygon;
 
 	function tryLogin() {
 		web3.eth.getAccounts().then( s => { mainAcc = s[0]});
 		if(mainAcc === undefined) {
-         if(window.ethereum.chainId != test_polygon) {
+         if(window.ethereum.chainId != chain) {
 				alert("Select correct network");
 			} else {
             document.getElementById("cole-wallet-status").innerHTML = "Connect Wallet";
@@ -1020,7 +1021,9 @@
 			});
 		} else {
 			document.getElementById("cole-wallet-status").innerHTML = "Connect Wallet";
-         tryLogin();
+         if(web3.eth.chainId == chain) { 
+            tryLogin(); 
+         }
 		}});
 	});
 
