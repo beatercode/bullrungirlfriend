@@ -1008,12 +1008,13 @@
 	function tryLogin() {
 		web3.eth.getAccounts().then( s => { mainAcc = s[0]});
 		if(mainAcc === undefined) {
-			document.getElementById("cole-wallet-status").innerHTML = "Connect Wallet";
-			window.web3 = new Web3(window.web3.currentProvider);
-			window.ethereum.enable();
-			if(window.ethereum.chainId != test_polygon) {
+         if(window.ethereum.chainId != test_polygon) {
 				alert("Select correct network");
-			}
+			} else {
+            document.getElementById("cole-wallet-status").innerHTML = "Connect Wallet";
+            window.web3 = new Web3(window.web3.currentProvider);
+            window.ethereum.enable();
+         }
 		} else {
 			document.getElementById("cole-wallet-status").innerHTML = "Connected";
 			console.log("Already connected!");
@@ -1043,8 +1044,7 @@
 
 	window.setInterval(function() {
 		if(contract !== undefined) {
-			contract.methods.getNotMintedAmount().call().then(
-				res => { document.getElementById("atmMint").innerHTML = res; });
+			contract.methods.getNotMintedAmount().call().then(res => { document.getElementById("atmMint").innerHTML = res; });
 			let perc = (document.getElementById("atmMint").innerHTML/document.getElementById("maxMint").innerHTML)*100;
 			perc = Math.ceil(100 - perc);
 			document.getElementById("meter-id").style.width = "" + perc + "%";
@@ -1063,27 +1063,27 @@
 		);
 	});
 
+   function loadContract() {
+      contract.methods.MINTING_LIMIT.call().call().then(res => { document.getElementById("maxMint").innerHTML = res; });
+      contract.methods.getNotMintedAmount().call().then(res => { document.getElementById("atmMint").innerHTML = res; });
+      let perc = (document.getElementById("atmMint").innerHTML/document.getElementById("maxMint").innerHTML)*100;
+      perc = Math.ceil(100 - perc);
+      document.getElementById("meter-id").style.width = "" + perc + "%";
+   }
+
 
 	window.addEventListener("load", function() {
 		
 		contract = new web3.eth.Contract(abi, address);
 		if(contract !== undefined) {
-			contract.methods.MINTING_LIMIT.call().call().then(
-				res => { document.getElementById("maxMint").innerHTML = res; });
-			contract.methods.getNotMintedAmount().call().then(
-				res => { document.getElementById("atmMint").innerHTML = res; });
-			let perc = (document.getElementById("atmMint").innerHTML/document.getElementById("maxMint").innerHTML)*100;
-			perc = Math.ceil(100 - perc);
-			document.getElementById("meter-id").style.width = "" + perc + "%";
-			console.log(perc);
+			loadContract();
 		}
 		web3.eth.getAccounts().then( s => { mainAcc = s[0]
 		if(mainAcc !== undefined) {
 			document.getElementById("cole-wallet-status").innerHTML = "Connected";
-        	console.log(contract);
 			// detect Metamask account change
 			window.ethereum.on('accountsChanged', function (accounts) {
-				console.log('accountsChanges',accounts);
+				console.log('accountsChanges -> ',accounts);
 				tryLogin();
 			});
 
@@ -1095,8 +1095,8 @@
 			}
 			});
 		} else {
-			console.warn("No wallet detected");
 			document.getElementById("cole-wallet-status").innerHTML = "Connect Wallet";
+         tryLogin();
 		}});
 	});
 
