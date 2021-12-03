@@ -1017,9 +1017,6 @@
 			// detect Network account change
 			window.ethereum.on('networkChanged', function(networkId){
 			console.log('networkChanged', window.ethereum.chainId);
-			if(window.ethereum.chainId != test_polygon) {
-				alert("Select correct network");
-			}
 			});
 		} else {
 			document.getElementById("cole-wallet-status").innerHTML = "Connect Wallet";
