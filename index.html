@@ -1013,7 +1013,7 @@
 			} else {
             document.getElementById("cole-wallet-status").innerHTML = "Connect Wallet";
             window.web3 = new Web3(window.web3.currentProvider);
-            window.ethereum.enable();
+            ethereum.request({ method: 'eth_requestAccounts' });
          }
 		} else {
 			document.getElementById("cole-wallet-status").innerHTML = "Connected";
