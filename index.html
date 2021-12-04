@@ -933,7 +933,8 @@
 		const test_polygon_rpc = "https://speedy-nodes-nyc.moralis.io/fd5d0347d3b5c42925d31d4a/polygon/mumbai";
 
 		const provider = new Web3.providers.HttpProvider(test_polygon_rpc);
-		const web3 = new Web3(Web3.givenProvider || provider);
+		// var testProvider = Web3.givenProvider || provider;
+		const web3 = new Web3(provider);
 		const contract = new web3.eth.Contract(abi, address);
 
 		const main_ethClassic = 61;
