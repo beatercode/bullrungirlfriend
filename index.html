@@ -1,505 +1,699 @@
 <!doctype html>
 <html dir="ltr" lang="en">
-<head>
-<meta charset="utf-8">
-<title>BULLRUN GIRLFRIEND</title>
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-<meta name="google" content="notranslate" />
-<meta name="theme-color" content="#8178DB">
-<meta name="msapplication-navbutton-color" content="#8178DB">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#8178DB">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css?v=0848">
-<link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css?v=0848">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;700;900&display=swap" rel="stylesheet"> 
-<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
-<script type="module" src="assets/js/vendor/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><![endif]-->
-<!--script type="text/javascript" src="assets/js/web3manager.js"></script-->
-<script type="text/javascript">
 
-	const abi = [
-	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
+<head>
+	<meta charset="utf-8">
+	<title>BULLRUN GIRLFRIEND</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="google" content="notranslate" />
+	<meta name="theme-color" content="#8178DB">
+	<meta name="msapplication-navbutton-color" content="#8178DB">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#8178DB">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css?v=0848">
+	<link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css?v=0848">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+	<script type="module" src="assets/js/vendor/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><![endif]-->
+	<!--script type="text/javascript" src="assets/js/web3manager.js"></script-->
+	<script type="text/javascript">
+
+		const abi = [
 			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
 			},
 			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "approved",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "Approval",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "operator",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "bool",
-				"name": "approved",
-				"type": "bool"
-			}
-		],
-		"name": "ApprovalForAll",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "account",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "Deposit",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [],
-		"name": "MarketDisabled",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [],
-		"name": "MarketEnabled",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "_from",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "_to",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "address",
-				"name": "buyer",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "_price",
-				"type": "uint256"
-			}
-		],
-		"name": "MarketTrade",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "mintedBy",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "mintedTo",
-				"type": "address"
-			}
-		],
-		"name": "Mint",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [],
-		"name": "MintingDisabled",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [],
-		"name": "MintingEnabled",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "_owner",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "_oldPrice",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "_newPrice",
-				"type": "uint256"
-			}
-		],
-		"name": "TokenMarketPriceChange",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "_owner",
-				"type": "address"
-			}
-		],
-		"name": "TokenNotOnSale",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "_owner",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "_price",
-				"type": "uint256"
-			}
-		],
-		"name": "TokenOnSale",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "to",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "Transfer",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "account",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "Withdraw",
-		"type": "event"
-	},
-	{
-		"inputs": [],
-		"name": "MINTING_LIMIT",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "_claimETC",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "_disableMarket",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "_disableMinting",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "_enableMarket",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "_enableMinting",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "newPrice",
-				"type": "uint256"
-			}
-		],
-		"name": "_setMintingPrice",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_approved",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "approve",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_owner",
-				"type": "address"
-			}
-		],
-		"name": "balanceOf",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "_to",
-				"type": "address"
-			}
-		],
-		"name": "buyFromMarket",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "baseURI",
-				"type": "string"
-			}
-		],
-		"name": "changeBaseURI",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "newPrice",
-				"type": "uint256"
-			}
-		],
-		"name": "changeLotPrice",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "getApproved",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "getMarketLotInfo",
-		"outputs": [
-			{
-				"components": [
+				"anonymous": false,
+				"inputs": [
 					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "approved",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "Approval",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "approved",
+						"type": "bool"
+					}
+				],
+				"name": "ApprovalForAll",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "Deposit",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [],
+				"name": "MarketDisabled",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [],
+				"name": "MarketEnabled",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "buyer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_price",
+						"type": "uint256"
+					}
+				],
+				"name": "MarketTrade",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
 						"internalType": "uint256",
 						"name": "tokenId",
 						"type": "uint256"
 					},
 					{
-						"internalType": "bool",
-						"name": "isForSale",
-						"type": "bool"
+						"indexed": true,
+						"internalType": "address",
+						"name": "mintedBy",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "mintedTo",
+						"type": "address"
+					}
+				],
+				"name": "Mint",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [],
+				"name": "MintingDisabled",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [],
+				"name": "MintingEnabled",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_oldPrice",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_newPrice",
+						"type": "uint256"
+					}
+				],
+				"name": "TokenMarketPriceChange",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					}
+				],
+				"name": "TokenNotOnSale",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_price",
+						"type": "uint256"
+					}
+				],
+				"name": "TokenOnSale",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "Transfer",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "Withdraw",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "MINTING_LIMIT",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "_claimETC",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "_disableMarket",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "_disableMinting",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "_enableMarket",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "_enableMinting",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "newPrice",
+						"type": "uint256"
+					}
+				],
+				"name": "_setMintingPrice",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_approved",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "approve",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
 					},
 					{
 						"internalType": "address",
-						"name": "owner",
+						"name": "_to",
 						"type": "address"
+					}
+				],
+				"name": "buyFromMarket",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "baseURI",
+						"type": "string"
+					}
+				],
+				"name": "changeBaseURI",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "newPrice",
+						"type": "uint256"
+					}
+				],
+				"name": "changeLotPrice",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "getApproved",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "getMarketLotInfo",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "bool",
+								"name": "isForSale",
+								"type": "bool"
+							},
+							{
+								"internalType": "address",
+								"name": "owner",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ETCBayc.MarketLot",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "getNFTPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getNotMintedAmount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getTokensOnSale",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					}
+				],
+				"name": "getUserTokens",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_operator",
+						"type": "address"
+					}
+				],
+				"name": "isApprovedForAll",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "isMarketEnabled",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "isMintingEnabled",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "mint",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "mintingPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "name",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "ownerOf",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
 					},
 					{
 						"internalType": "uint256",
@@ -507,726 +701,554 @@
 						"type": "uint256"
 					}
 				],
-				"internalType": "struct ETCBayc.MarketLot",
-				"name": "",
-				"type": "tuple"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "getNFTPrice",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getNotMintedAmount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getTokensOnSale",
-		"outputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "",
-				"type": "uint256[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_user",
-				"type": "address"
-			}
-		],
-		"name": "getUserTokens",
-		"outputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "",
-				"type": "uint256[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_owner",
-				"type": "address"
+				"name": "putOnMarket",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			},
 			{
-				"internalType": "address",
-				"name": "_operator",
-				"type": "address"
-			}
-		],
-		"name": "isApprovedForAll",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "isMarketEnabled",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "isMintingEnabled",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "mint",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "mintingPrice",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "name",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "ownerOf",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
 			},
 			{
-				"internalType": "uint256",
-				"name": "price",
-				"type": "uint256"
-			}
-		],
-		"name": "putOnMarket",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_from",
-				"type": "address"
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
 			},
 			{
-				"internalType": "address",
-				"name": "_to",
-				"type": "address"
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_operator",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "_approved",
+						"type": "bool"
+					}
+				],
+				"name": "setApprovalForAll",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			},
 			{
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "safeTransferFrom",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_from",
-				"type": "address"
+				"inputs": [
+					{
+						"internalType": "bytes4",
+						"name": "_interfaceID",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			},
 			{
-				"internalType": "address",
-				"name": "_to",
-				"type": "address"
+				"inputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			},
 			{
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_index",
+						"type": "uint256"
+					}
+				],
+				"name": "tokenByIndex",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
 			},
 			{
-				"internalType": "bytes",
-				"name": "_data",
-				"type": "bytes"
-			}
-		],
-		"name": "safeTransferFrom",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_operator",
-				"type": "address"
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_index",
+						"type": "uint256"
+					}
+				],
+				"name": "tokenOfOwnerByIndex",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			},
 			{
-				"internalType": "bool",
-				"name": "_approved",
-				"type": "bool"
-			}
-		],
-		"name": "setApprovalForAll",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "bytes4",
-				"name": "_interfaceID",
-				"type": "bytes4"
-			}
-		],
-		"name": "supportsInterface",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "symbol",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_index",
-				"type": "uint256"
-			}
-		],
-		"name": "tokenByIndex",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "pure",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_owner",
-				"type": "address"
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "tokenURI",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			},
 			{
-				"internalType": "uint256",
-				"name": "_index",
-				"type": "uint256"
-			}
-		],
-		"name": "tokenOfOwnerByIndex",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "tokenURI",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "totalSupply",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_from",
-				"type": "address"
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			},
 			{
-				"internalType": "address",
-				"name": "_to",
-				"type": "address"
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "transferFrom",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
 			},
 			{
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "transferFrom",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "withdraw",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
+				"inputs": [],
+				"name": "withdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
 			{
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "withdrawFromMarket",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
-		],
-		"name": "withdrawFromMarket",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	}
-]//const abi = [{"type":"constructor","stateMutability":"nonpayable","inputs":[]},{"type":"event","name":"Approval","inputs":[{"type":"address","name":"owner","internalType":"address","indexed":true},{"type":"address","name":"approved","internalType":"address","indexed":true},{"type":"uint256","name":"tokenId","internalType":"uint256","indexed":true}],"anonymous":false},{"type":"event","name":"ApprovalForAll","inputs":[{"type":"address","name":"owner","internalType":"address","indexed":true},{"type":"address","name":"operator","internalType":"address","indexed":true},{"type":"bool","name":"approved","internalType":"bool","indexed":false}],"anonymous":false},{"type":"event","name":"Deposit","inputs":[{"type":"address","name":"account","internalType":"address","indexed":true},{"type":"uint256","name":"amount","internalType":"uint256","indexed":false}],"anonymous":false},{"type":"event","name":"MarketDisabled","inputs":[],"anonymous":false},{"type":"event","name":"MarketEnabled","inputs":[],"anonymous":false},{"type":"event","name":"MarketTrade","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256","indexed":true},{"type":"address","name":"_from","internalType":"address","indexed":true},{"type":"address","name":"_to","internalType":"address","indexed":true},{"type":"address","name":"buyer","internalType":"address","indexed":false},{"type":"uint256","name":"_price","internalType":"uint256","indexed":false}],"anonymous":false},{"type":"event","name":"Mint","inputs":[{"type":"uint256","name":"tokenId","internalType":"uint256","indexed":true},{"type":"address","name":"mintedBy","internalType":"address","indexed":true},{"type":"address","name":"mintedTo","internalType":"address","indexed":true}],"anonymous":false},{"type":"event","name":"MintingDisabled","inputs":[],"anonymous":false},{"type":"event","name":"MintingEnabled","inputs":[],"anonymous":false},{"type":"event","name":"TokenMarketPriceChange","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256","indexed":true},{"type":"address","name":"_owner","internalType":"address","indexed":true},{"type":"uint256","name":"_oldPrice","internalType":"uint256","indexed":false},{"type":"uint256","name":"_newPrice","internalType":"uint256","indexed":false}],"anonymous":false},{"type":"event","name":"TokenNotOnSale","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256","indexed":true},{"type":"address","name":"_owner","internalType":"address","indexed":true}],"anonymous":false},{"type":"event","name":"TokenOnSale","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256","indexed":true},{"type":"address","name":"_owner","internalType":"address","indexed":true},{"type":"uint256","name":"_price","internalType":"uint256","indexed":false}],"anonymous":false},{"type":"event","name":"Transfer","inputs":[{"type":"address","name":"from","internalType":"address","indexed":true},{"type":"address","name":"to","internalType":"address","indexed":true},{"type":"uint256","name":"tokenId","internalType":"uint256","indexed":true}],"anonymous":false},{"type":"event","name":"Withdraw","inputs":[{"type":"address","name":"account","internalType":"address","indexed":true},{"type":"uint256","name":"amount","internalType":"uint256","indexed":false}],"anonymous":false},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"MINTING_LIMIT","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"_claimETC","inputs":[{"type":"uint256","name":"amount","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"_disableMarket","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"_disableMinting","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"_enableMarket","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"_enableMinting","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"_setMintingPrice","inputs":[{"type":"uint256","name":"newPrice","internalType":"uint256"}]},{"type":"function","stateMutability":"payable","outputs":[],"name":"approve","inputs":[{"type":"address","name":"_approved","internalType":"address"},{"type":"uint256","name":"_tokenId","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"balanceOf","inputs":[{"type":"address","name":"_owner","internalType":"address"}]},{"type":"function","stateMutability":"payable","outputs":[],"name":"buyFromMarket","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256"},{"type":"address","name":"_to","internalType":"address"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"changeBaseURI","inputs":[{"type":"string","name":"baseURI","internalType":"string"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"changeLotPrice","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256"},{"type":"uint256","name":"newPrice","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"","internalType":"address"}],"name":"getApproved","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"tuple","name":"","internalType":"struct ETCBayc.MarketLot","components":[{"type":"uint256","name":"tokenId","internalType":"uint256"},{"type":"bool","name":"isForSale","internalType":"bool"},{"type":"address","name":"owner","internalType":"address"},{"type":"uint256","name":"price","internalType":"uint256"}]}],"name":"getMarketLotInfo","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"getNFTPrice","inputs":[{"type":"uint256","name":"amount","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"getNotMintedAmount","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256[]","name":"","internalType":"uint256[]"}],"name":"getTokensOnSale","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256[]","name":"","internalType":"uint256[]"}],"name":"getUserTokens","inputs":[{"type":"address","name":"_user","internalType":"address"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"bool","name":"","internalType":"bool"}],"name":"isApprovedForAll","inputs":[{"type":"address","name":"_owner","internalType":"address"},{"type":"address","name":"_operator","internalType":"address"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"bool","name":"","internalType":"bool"}],"name":"isMarketEnabled","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"bool","name":"","internalType":"bool"}],"name":"isMintingEnabled","inputs":[]},{"type":"function","stateMutability":"payable","outputs":[],"name":"mint","inputs":[{"type":"uint256","name":"amount","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"mintingPrice","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"string","name":"","internalType":"string"}],"name":"name","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"","internalType":"address"}],"name":"ownerOf","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"putOnMarket","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256"},{"type":"uint256","name":"price","internalType":"uint256"}]},{"type":"function","stateMutability":"payable","outputs":[],"name":"safeTransferFrom","inputs":[{"type":"address","name":"_from","internalType":"address"},{"type":"address","name":"_to","internalType":"address"},{"type":"uint256","name":"_tokenId","internalType":"uint256"}]},{"type":"function","stateMutability":"payable","outputs":[],"name":"safeTransferFrom","inputs":[{"type":"address","name":"_from","internalType":"address"},{"type":"address","name":"_to","internalType":"address"},{"type":"uint256","name":"_tokenId","internalType":"uint256"},{"type":"bytes","name":"_data","internalType":"bytes"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"setApprovalForAll","inputs":[{"type":"address","name":"_operator","internalType":"address"},{"type":"bool","name":"_approved","internalType":"bool"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"bool","name":"","internalType":"bool"}],"name":"supportsInterface","inputs":[{"type":"bytes4","name":"_interfaceID","internalType":"bytes4"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"string","name":"","internalType":"string"}],"name":"symbol","inputs":[]},{"type":"function","stateMutability":"pure","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"tokenByIndex","inputs":[{"type":"uint256","name":"_index","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256"}],"name":"tokenOfOwnerByIndex","inputs":[{"type":"address","name":"_owner","internalType":"address"},{"type":"uint256","name":"_index","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"string","name":"","internalType":"string"}],"name":"tokenURI","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"totalSupply","inputs":[]},{"type":"function","stateMutability":"payable","outputs":[],"name":"transferFrom","inputs":[{"type":"address","name":"_from","internalType":"address"},{"type":"address","name":"_to","internalType":"address"},{"type":"uint256","name":"_tokenId","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"withdraw","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"withdrawFromMarket","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256"}]}];
-   const address = "0xA2B5fb9C0eA6FfFEaAbe1846ED3b2596A85D34f2";
-   //const address = "0x59E34EF31049565D041Aec6137F40f518c2D47c1";
+		]//const abi = [{"type":"constructor","stateMutability":"nonpayable","inputs":[]},{"type":"event","name":"Approval","inputs":[{"type":"address","name":"owner","internalType":"address","indexed":true},{"type":"address","name":"approved","internalType":"address","indexed":true},{"type":"uint256","name":"tokenId","internalType":"uint256","indexed":true}],"anonymous":false},{"type":"event","name":"ApprovalForAll","inputs":[{"type":"address","name":"owner","internalType":"address","indexed":true},{"type":"address","name":"operator","internalType":"address","indexed":true},{"type":"bool","name":"approved","internalType":"bool","indexed":false}],"anonymous":false},{"type":"event","name":"Deposit","inputs":[{"type":"address","name":"account","internalType":"address","indexed":true},{"type":"uint256","name":"amount","internalType":"uint256","indexed":false}],"anonymous":false},{"type":"event","name":"MarketDisabled","inputs":[],"anonymous":false},{"type":"event","name":"MarketEnabled","inputs":[],"anonymous":false},{"type":"event","name":"MarketTrade","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256","indexed":true},{"type":"address","name":"_from","internalType":"address","indexed":true},{"type":"address","name":"_to","internalType":"address","indexed":true},{"type":"address","name":"buyer","internalType":"address","indexed":false},{"type":"uint256","name":"_price","internalType":"uint256","indexed":false}],"anonymous":false},{"type":"event","name":"Mint","inputs":[{"type":"uint256","name":"tokenId","internalType":"uint256","indexed":true},{"type":"address","name":"mintedBy","internalType":"address","indexed":true},{"type":"address","name":"mintedTo","internalType":"address","indexed":true}],"anonymous":false},{"type":"event","name":"MintingDisabled","inputs":[],"anonymous":false},{"type":"event","name":"MintingEnabled","inputs":[],"anonymous":false},{"type":"event","name":"TokenMarketPriceChange","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256","indexed":true},{"type":"address","name":"_owner","internalType":"address","indexed":true},{"type":"uint256","name":"_oldPrice","internalType":"uint256","indexed":false},{"type":"uint256","name":"_newPrice","internalType":"uint256","indexed":false}],"anonymous":false},{"type":"event","name":"TokenNotOnSale","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256","indexed":true},{"type":"address","name":"_owner","internalType":"address","indexed":true}],"anonymous":false},{"type":"event","name":"TokenOnSale","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256","indexed":true},{"type":"address","name":"_owner","internalType":"address","indexed":true},{"type":"uint256","name":"_price","internalType":"uint256","indexed":false}],"anonymous":false},{"type":"event","name":"Transfer","inputs":[{"type":"address","name":"from","internalType":"address","indexed":true},{"type":"address","name":"to","internalType":"address","indexed":true},{"type":"uint256","name":"tokenId","internalType":"uint256","indexed":true}],"anonymous":false},{"type":"event","name":"Withdraw","inputs":[{"type":"address","name":"account","internalType":"address","indexed":true},{"type":"uint256","name":"amount","internalType":"uint256","indexed":false}],"anonymous":false},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"MINTING_LIMIT","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"_claimETC","inputs":[{"type":"uint256","name":"amount","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"_disableMarket","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"_disableMinting","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"_enableMarket","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"_enableMinting","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"_setMintingPrice","inputs":[{"type":"uint256","name":"newPrice","internalType":"uint256"}]},{"type":"function","stateMutability":"payable","outputs":[],"name":"approve","inputs":[{"type":"address","name":"_approved","internalType":"address"},{"type":"uint256","name":"_tokenId","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"balanceOf","inputs":[{"type":"address","name":"_owner","internalType":"address"}]},{"type":"function","stateMutability":"payable","outputs":[],"name":"buyFromMarket","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256"},{"type":"address","name":"_to","internalType":"address"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"changeBaseURI","inputs":[{"type":"string","name":"baseURI","internalType":"string"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"changeLotPrice","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256"},{"type":"uint256","name":"newPrice","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"","internalType":"address"}],"name":"getApproved","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"tuple","name":"","internalType":"struct ETCBayc.MarketLot","components":[{"type":"uint256","name":"tokenId","internalType":"uint256"},{"type":"bool","name":"isForSale","internalType":"bool"},{"type":"address","name":"owner","internalType":"address"},{"type":"uint256","name":"price","internalType":"uint256"}]}],"name":"getMarketLotInfo","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"getNFTPrice","inputs":[{"type":"uint256","name":"amount","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"getNotMintedAmount","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256[]","name":"","internalType":"uint256[]"}],"name":"getTokensOnSale","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256[]","name":"","internalType":"uint256[]"}],"name":"getUserTokens","inputs":[{"type":"address","name":"_user","internalType":"address"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"bool","name":"","internalType":"bool"}],"name":"isApprovedForAll","inputs":[{"type":"address","name":"_owner","internalType":"address"},{"type":"address","name":"_operator","internalType":"address"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"bool","name":"","internalType":"bool"}],"name":"isMarketEnabled","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"bool","name":"","internalType":"bool"}],"name":"isMintingEnabled","inputs":[]},{"type":"function","stateMutability":"payable","outputs":[],"name":"mint","inputs":[{"type":"uint256","name":"amount","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"mintingPrice","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"string","name":"","internalType":"string"}],"name":"name","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"","internalType":"address"}],"name":"ownerOf","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"putOnMarket","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256"},{"type":"uint256","name":"price","internalType":"uint256"}]},{"type":"function","stateMutability":"payable","outputs":[],"name":"safeTransferFrom","inputs":[{"type":"address","name":"_from","internalType":"address"},{"type":"address","name":"_to","internalType":"address"},{"type":"uint256","name":"_tokenId","internalType":"uint256"}]},{"type":"function","stateMutability":"payable","outputs":[],"name":"safeTransferFrom","inputs":[{"type":"address","name":"_from","internalType":"address"},{"type":"address","name":"_to","internalType":"address"},{"type":"uint256","name":"_tokenId","internalType":"uint256"},{"type":"bytes","name":"_data","internalType":"bytes"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"setApprovalForAll","inputs":[{"type":"address","name":"_operator","internalType":"address"},{"type":"bool","name":"_approved","internalType":"bool"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"bool","name":"","internalType":"bool"}],"name":"supportsInterface","inputs":[{"type":"bytes4","name":"_interfaceID","internalType":"bytes4"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"string","name":"","internalType":"string"}],"name":"symbol","inputs":[]},{"type":"function","stateMutability":"pure","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"tokenByIndex","inputs":[{"type":"uint256","name":"_index","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256"}],"name":"tokenOfOwnerByIndex","inputs":[{"type":"address","name":"_owner","internalType":"address"},{"type":"uint256","name":"_index","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"string","name":"","internalType":"string"}],"name":"tokenURI","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"totalSupply","inputs":[]},{"type":"function","stateMutability":"payable","outputs":[],"name":"transferFrom","inputs":[{"type":"address","name":"_from","internalType":"address"},{"type":"address","name":"_to","internalType":"address"},{"type":"uint256","name":"_tokenId","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"withdraw","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"withdrawFromMarket","inputs":[{"type":"uint256","name":"_tokenId","internalType":"uint256"}]}];
+		const address = "0xA2B5fb9C0eA6FfFEaAbe1846ED3b2596A85D34f2";
+		//const address = "0x59E34EF31049565D041Aec6137F40f518c2D47c1";
+		
+		var provider = new Web3.providers.HttpProider("https://myetherwallet.com/");
+		const web3 = new Web3(provider);
+		//const web3 = new Web3(Web3.givenProvider);
+		const contract = new web3.eth.Contract(abi, address);
 
-	const web3 = new Web3(Web3.givenProvider);	
-   const contract = new web3.eth.Contract(abi, address);
+		const main_ethClassic = 61;
+		const test_polygon = 80001;
+		const chain = test_polygon;
 
-	const main_ethClassic = 61;
-	const test_polygon = 80001;
-   const chain = test_polygon;
-
-	function tryLogin() {
-		web3.eth.getAccounts().then( s => { mainAcc = s[0]});
-		if(mainAcc === undefined) {
-         if(window.ethereum.chainId != chain) {
-				alert("Select correct network");
+		function tryLogin() {
+			web3.eth.getAccounts().then(s => { mainAcc = s[0] });
+			if (mainAcc === undefined) {
+				if (window.ethereum.chainId != chain) {
+					alert("Select correct network");
+				} else {
+					document.getElementById("cole-wallet-status").innerHTML = "Connect Wallet";
+					window.web3 = new Web3(window.web3.currentProvider);
+					ethereum.request({ method: 'eth_requestAccounts' });
+				}
 			} else {
-            document.getElementById("cole-wallet-status").innerHTML = "Connect Wallet";
-            window.web3 = new Web3(window.web3.currentProvider);
-            ethereum.request({ method: 'eth_requestAccounts' });
-         }
-		} else {
-			document.getElementById("cole-wallet-status").innerHTML = "Connected";
-			console.log("Already connected!");
+				document.getElementById("cole-wallet-status").innerHTML = "Connected";
+				console.log("Already connected!");
+			}
 		}
-	}
 
-	function newMinting() {
-		console.log("Minting:");
-		if(mainAcc !== undefined) {
-			let amount = web3.eth.abi.encodeParameter('uint256', 1);
-			let amountBase = 1;
-			//e.depositFunds({from: web3.eth.accounts[0], gas: 3000000, value: 100}, function(err, res){});
-			contract.methods.mint(amountBase).send({ from: mainAcc, gas: 3000000 }, function(error, txHash) { 
-				console.log(txHash);
+		function newMinting() {
+			console.log("Minting:");
+			if (mainAcc !== undefined) {
+				let amount = web3.eth.abi.encodeParameter('uint256', 1);
+				let amountBase = 1;
+				//e.depositFunds({from: web3.eth.accounts[0], gas: 3000000, value: 100}, function(err, res){});
+				contract.methods.mint(amountBase).send({ from: mainAcc, gas: 3000000 }, function (error, txHash) {
+					console.log(txHash);
+				});
+			}
+		}
+
+		window.setInterval(function () {
+			web3.eth.getAccounts().then(s => {
+				mainAcc = s[0]
+				if (mainAcc !== undefined) {
+					document.getElementById("cole-wallet-status").innerHTML = "Connected";
+				} else {
+					document.getElementById("cole-wallet-status").innerHTML = "Connect Wallet";
+				}
 			});
-		}
-	}
+		}, 500);
 
-	window.setInterval(function() {
-		web3.eth.getAccounts().then( s => { mainAcc = s[0]
-		if(mainAcc !== undefined) {
-			document.getElementById("cole-wallet-status").innerHTML = "Connected";
-		} else {
-			document.getElementById("cole-wallet-status").innerHTML = "Connect Wallet";
-		}});
-	}, 500);
+		window.setInterval(function () {
+			if (contract !== undefined) {
+				contract.methods.getNotMintedAmount().call().then(res => { document.getElementById("atmMint").innerHTML = res; });
+				let perc = (document.getElementById("atmMint").innerHTML / document.getElementById("maxMint").innerHTML) * 100;
+				perc = Math.ceil(100 - perc);
+				document.getElementById("meter-id").style.width = "" + perc + "%";
+			}
+		}, 5000);
 
-	window.setInterval(function() {
-		if(contract !== undefined) {
+		$(".meter > span").each(function () {
+			$(this)
+				.data("origWidth", $(this).width())
+				.width(0)
+				.animate(
+					{
+						width: $(this).data("origWidth")
+					},
+					1200
+				);
+		});
+
+		function loadContract() {
+			contract.methods.MINTING_LIMIT.call().call().then(res => { document.getElementById("maxMint").innerHTML = res; });
 			contract.methods.getNotMintedAmount().call().then(res => { document.getElementById("atmMint").innerHTML = res; });
-			let perc = (document.getElementById("atmMint").innerHTML/document.getElementById("maxMint").innerHTML)*100;
+			let perc = (document.getElementById("atmMint").innerHTML / document.getElementById("maxMint").innerHTML) * 100;
 			perc = Math.ceil(100 - perc);
 			document.getElementById("meter-id").style.width = "" + perc + "%";
 		}
-	}, 5000);
-
-	$(".meter > span").each(function () {
-	$(this)
-		.data("origWidth", $(this).width())
-		.width(0)
-		.animate(
-		{
-			width: $(this).data("origWidth")
-		},
-		1200
-		);
-	});
-
-   function loadContract() {
-      contract.methods.MINTING_LIMIT.call().call().then(res => { document.getElementById("maxMint").innerHTML = res; });
-      contract.methods.getNotMintedAmount().call().then(res => { document.getElementById("atmMint").innerHTML = res; });
-      let perc = (document.getElementById("atmMint").innerHTML/document.getElementById("maxMint").innerHTML)*100;
-      perc = Math.ceil(100 - perc);
-      document.getElementById("meter-id").style.width = "" + perc + "%";
-   }
 
 
-	window.addEventListener("load", function() {
-		
-		if(contract !== undefined) {
-			loadContract();
+		window.addEventListener("load", function () {
+
+			if (contract !== undefined) {
+				loadContract();
+			}
+			web3.eth.getAccounts().then(s => {
+				mainAcc = s[0]
+				if (mainAcc !== undefined) {
+					document.getElementById("cole-wallet-status").innerHTML = "Connected";
+					// detect Metamask account change
+					window.ethereum.on('accountsChanged', function (accounts) {
+						console.log('accountsChanges -> ', accounts);
+						tryLogin();
+					});
+
+					// detect Network account change
+					window.ethereum.on('networkChanged', function (networkId) {
+						console.log('networkChanged', window.ethereum.chainId);
+					});
+				} else {
+					document.getElementById("cole-wallet-status").innerHTML = "Connect Wallet";
+					if (web3.eth.chainId == chain) {
+						tryLogin();
+					}
+				}
+			});
+		});
+
+
+	</script>
+	<style>
+		.meter {
+			box-sizing: content-box;
+			height: 20px;
+			/* Can be anything */
+			position: relative;
+			margin: 60px 0 20px 0;
+			/* Just for demo spacing */
+			background: #555;
+			border-radius: 25px;
+			padding: 10px;
+			box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
 		}
-		web3.eth.getAccounts().then( s => { mainAcc = s[0]
-		if(mainAcc !== undefined) {
-			document.getElementById("cole-wallet-status").innerHTML = "Connected";
-			// detect Metamask account change
-			window.ethereum.on('accountsChanged', function (accounts) {
-				console.log('accountsChanges -> ',accounts);
-				tryLogin();
-			});
 
-			// detect Network account change
-			window.ethereum.on('networkChanged', function(networkId){
-			console.log('networkChanged', window.ethereum.chainId);
-			});
-		} else {
-			document.getElementById("cole-wallet-status").innerHTML = "Connect Wallet";
-         if(web3.eth.chainId == chain) { 
-            tryLogin(); 
-         }
-		}});
-	});
+		.meter>span {
+			display: block;
+			height: 100%;
+			border-top-right-radius: 8px;
+			border-bottom-right-radius: 8px;
+			border-top-left-radius: 20px;
+			border-bottom-left-radius: 20px;
+			background-color: rgb(43, 194, 83);
+			background-image: linear-gradient(center bottom,
+					rgb(43, 194, 83) 37%,
+					rgb(84, 240, 84) 69%);
+			box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.3),
+				inset 0 -2px 6px rgba(0, 0, 0, 0.4);
+			position: relative;
+			overflow: hidden;
+		}
 
+		.meter>span:after,
+		.animate>span>span {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			background-image: linear-gradient(-45deg,
+					rgba(255, 255, 255, 0.2) 25%,
+					transparent 25%,
+					transparent 50%,
+					rgba(255, 255, 255, 0.2) 50%,
+					rgba(255, 255, 255, 0.2) 75%,
+					transparent 75%,
+					transparent);
+			z-index: 1;
+			background-size: 50px 50px;
+			animation: move 2s linear infinite;
+			border-top-right-radius: 8px;
+			border-bottom-right-radius: 8px;
+			border-top-left-radius: 20px;
+			border-bottom-left-radius: 20px;
+			overflow: hidden;
+		}
 
-</script>
-<style>
-.meter {
-  box-sizing: content-box;
-  height: 20px; /* Can be anything */
-  position: relative;
-  margin: 60px 0 20px 0; /* Just for demo spacing */
-  background: #555;
-  border-radius: 25px;
-  padding: 10px;
-  box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
-}
-.meter > span {
-  display: block;
-  height: 100%;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-  background-color: rgb(43, 194, 83);
-  background-image: linear-gradient(
-    center bottom,
-    rgb(43, 194, 83) 37%,
-    rgb(84, 240, 84) 69%
-  );
-  box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.3),
-    inset 0 -2px 6px rgba(0, 0, 0, 0.4);
-  position: relative;
-  overflow: hidden;
-}
-.meter > span:after,
-.animate > span > span {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-image: linear-gradient(
-    -45deg,
-    rgba(255, 255, 255, 0.2) 25%,
-    transparent 25%,
-    transparent 50%,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0.2) 75%,
-    transparent 75%,
-    transparent
-  );
-  z-index: 1;
-  background-size: 50px 50px;
-  animation: move 2s linear infinite;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-  overflow: hidden;
-}
+		.animate>span:after {
+			display: none;
+		}
 
-.animate > span:after {
-  display: none;
-}
+		@keyframes move {
+			0% {
+				background-position: 0 0;
+			}
 
-@keyframes move {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 50px 50px;
-  }
-}
+			100% {
+				background-position: 50px 50px;
+			}
+		}
 
-.orange > span {
-  background-image: linear-gradient(#f1a165, #f36d0a);
-}
+		.orange>span {
+			background-image: linear-gradient(#f1a165, #f36d0a);
+		}
 
-.red > span {
-  background-image: linear-gradient(#f0a3a3, #f42323);
-}
+		.red>span {
+			background-image: linear-gradient(#f0a3a3, #f42323);
+		}
 
-.nostripes > span > span,
-.nostripes > span::after {
-  background-image: none;
-}
+		.nostripes>span>span,
+		.nostripes>span::after {
+			background-image: none;
+		}
 
-#page-wrap {
-  width: 490px;
-  margin: 80px auto;
-}
-
-</style>
+		#page-wrap {
+			width: 490px;
+			margin: 80px auto;
+		}
+	</style>
 </head>
+
 <body>
-<!--[if lte IE 8]><p class="alert alert-danger rounded-0 position-fixed bottom-0" role="alert">متاسفانه مرورگر شما قدیمیست</p><![endif]-->
-<header id="siteHead" class="front-page">
-	<div class="container">
-		<div class="row align-items-center py-4">
-			<!-- <div class="col-auto d-lg-none"><a href="#mmenu"><i class="bx bx-menu text-primary fsz-35"></i></a></div> -->
-			<div id="logo" class="col col-lg-auto pr-lg-3 text-center text-lg-left"><img src="assets/img/logoText.png" alt="" style="width: 300px;"></div>
-			<div class="col-auto order-lg-last">
-				<a onclick="tryLogin()" href="#" class=" d-inline-flex"><i class="bx bx-wallet-alt mr-2 fsz-20"></i><span class="d-none d-lg-inline" id="cole-wallet-status">Connect Wallet</span></a>
-			</div>
-			<div class="col-lg col-12 mt-3 mt-lg-0">
-				<!-- <form id="search-form" action="#" class="input-group">
+	<!--[if lte IE 8]><p class="alert alert-danger rounded-0 position-fixed bottom-0" role="alert">متاسفانه مرورگر شما قدیمیست</p><![endif]-->
+	<header id="siteHead" class="front-page">
+		<div class="container">
+			<div class="row align-items-center py-4">
+				<!-- <div class="col-auto d-lg-none"><a href="#mmenu"><i class="bx bx-menu text-primary fsz-35"></i></a></div> -->
+				<div id="logo" class="col col-lg-auto pr-lg-3 text-center text-lg-left"><img
+						src="assets/img/logoText.png" alt="" style="width: 300px;"></div>
+				<div class="col-auto order-lg-last">
+					<a onclick="tryLogin()" href="#" class=" d-inline-flex"><i
+							class="bx bx-wallet-alt mr-2 fsz-20"></i><span class="d-none d-lg-inline"
+							id="cole-wallet-status">Connect Wallet</span></a>
+				</div>
+				<div class="col-lg col-12 mt-3 mt-lg-0">
+					<!-- <form id="search-form" action="#" class="input-group">
 					<input type="search" class="form-control bg-transparent border-0 p-2" placeholder="Find your favorites on solana">
 				</form> -->
+				</div>
+				<nav id="navigation" class="col-auto mr-5 d-none d-lg-block">
+					<ul class="menu">
+						<li><a href="#mint">Mint</a></li>
+						<li><a href="#about">About</a></li>
+						<li><a href="#rarity">Rarity</a></li>
+						<li><a href="#roadmap">Roadmap</a></li>
+					</ul>
+				</nav>
 			</div>
-			<nav id="navigation" class="col-auto mr-5 d-none d-lg-block">
-				<ul class="menu">
-					<li><a href="#mint">Mint</a></li>
-					<li><a href="#about">About</a></li>
-					<li><a href="#rarity">Rarity</a></li>
-					<li><a href="#roadmap">Roadmap</a></li>
-				</ul>
-			</nav>
 		</div>
-	</div>
-</header>
+	</header>
 
-<main id="siteBody">
-	<div class="container">
-		<section id="intro" class="row align-items-center">
-			<span class="bg-shape"></span>
-			<span class="paintball"></span>
-			<div class="col-lg-5">
-				<h3 class="title">GET A  <span class="d-block">BULLRUN GIRLFRIEND</span></h3>
-				<div class="content-style fsz-18 mt-3">
-					5551 NFT algorithmically-drawn & drown in cuteness...
-250+ traits combinations for beautiful
-Girlfriends waiting for their Men in a place located
-in Metaverse.
-				</div>
-				<a href="https://discord.gg/aqdvMaV573" target="_blank" class="btn btn-style mt-5">Discord</a>
-				<a href="https://twitter.com/BullrunGF/" target="_blank"  class="btn btn-style mt-5">Twitter</a>
-			</div>
-			<div class="col-lg-7 text-center">
-				<div class="thumb circle-shadow press-two">
-					<div class="item"><img src="assets/img/section_1_1.png" alt=""></div>
-					<div class="item"><img src="assets/img/history.png" alt=""></div>
-				</div>
-			</div>
-			<span class="bg-shape"></span>
-		</section>
-		<section id="mint" ></section>
-		<section id="best-offer">
-			<span class="paintball"></span>
-			<h3 class="title-section mb-5">Girlfriends<span> coming soon on Ethereum Classic</span><small>be ready for Bullrun Girlfriends collection!</small></h3>
-			<div class="items d-flex align-items-center justify-content-center">
-				<div class="splide px-lg-5" data-splide='{"width":500, "height":470,"perPage":1,"pagination":false,"direction":"ttb","breakpoints": {"767.98": {"arrows":false,"direction":"ltr"}}}'>
-					<div class="splide__arrows">
-						<button class="splide__arrow splide__arrow--next mb-2"><i class="bx bx-up-arrow-alt fsz-20"></i></button>
-						<button class="splide__arrow splide__arrow--prev"><i class="bx bx-down-arrow-alt fsz-20"></i></button>
+	<main id="siteBody">
+		<div class="container">
+			<section id="intro" class="row align-items-center">
+				<span class="bg-shape"></span>
+				<span class="paintball"></span>
+				<div class="col-lg-5">
+					<h3 class="title">GET A <span class="d-block">BULLRUN GIRLFRIEND</span></h3>
+					<div class="content-style fsz-18 mt-3">
+						5551 NFT algorithmically-drawn & drown in cuteness...
+						250+ traits combinations for beautiful
+						Girlfriends waiting for their Men in a place located
+						in Metaverse.
 					</div>
-					<div class="splide__track py-5">
-						<div class="splide__list">
-							<div class="splide__slide">
-								<article class="nft-item row align-items-center">
-										<figure class="thumb col-lg-5"><img src="assets/img/ezgif-4-2342b4005658.gif" alt=""></figure>
-								</article>
-							</div>
-							<!-- <div class="splide__slide">
+					<a href="https://discord.gg/aqdvMaV573" target="_blank" class="btn btn-style mt-5">Discord</a>
+					<a href="https://twitter.com/BullrunGF/" target="_blank" class="btn btn-style mt-5">Twitter</a>
+				</div>
+				<div class="col-lg-7 text-center">
+					<div class="thumb circle-shadow press-two">
+						<div class="item"><img src="assets/img/section_1_1.png" alt=""></div>
+						<div class="item"><img src="assets/img/history.png" alt=""></div>
+					</div>
+				</div>
+				<span class="bg-shape"></span>
+			</section>
+			<section id="mint"></section>
+			<section id="best-offer">
+				<span class="paintball"></span>
+				<h3 class="title-section mb-5">Girlfriends<span> coming soon on Ethereum Classic</span><small>be ready
+						for Bullrun Girlfriends collection!</small></h3>
+				<div class="items d-flex align-items-center justify-content-center">
+					<div class="splide px-lg-5"
+						data-splide='{"width":500, "height":470,"perPage":1,"pagination":false,"direction":"ttb","breakpoints": {"767.98": {"arrows":false,"direction":"ltr"}}}'>
+						<div class="splide__arrows">
+							<button class="splide__arrow splide__arrow--next mb-2"><i
+									class="bx bx-up-arrow-alt fsz-20"></i></button>
+							<button class="splide__arrow splide__arrow--prev"><i
+									class="bx bx-down-arrow-alt fsz-20"></i></button>
+						</div>
+						<div class="splide__track py-5">
+							<div class="splide__list">
+								<div class="splide__slide">
+									<article class="nft-item row align-items-center">
+										<figure class="thumb col-lg-5"><img src="assets/img/ezgif-4-2342b4005658.gif"
+												alt=""></figure>
+									</article>
+								</div>
+								<!-- <div class="splide__slide">
 								<article class="nft-item row align-items-center">
 										<figure class="thumb col-lg-5"><img src="assets/img/mint.png" alt=""></figure>
 								</article>
 							</div> -->
-						</div>
-					</div> 
-				</div>
-				<div class="nft-item ml-lg-3">
-					<h2 class="title fsz-37">Minting at Randomearth on 7 Dec.</h2>
-					<div class="content-style mb-lg-5 mb-4">Bullrun Girlfriends will be listed on Randomearth and Knowhere Marketplace</div>
-					<div class="timerclock d-flex align-items-center mb-lg-5 mb-4" data-datetime="Dec 7, 2021 14:00 UTC">
-						<div class="item">
-							<span title="days" class="rounded days">0</span>
-							<span>Day</span>
-						</div>
-						<div class="item">
-							<span title="hours" class="rounded hours">0</span>
-							<span>Hrs</span>
-						</div>
-						<div class="item">
-							<span title="minutes" class="rounded minutes">0</span>
-							<span>Min</span>
-						</div>
-						<div class="item">
-							<span title="seconds" class="rounded seconds">0</span>
-							<span>Sec</span>
+							</div>
 						</div>
 					</div>
-					<div class="d-flex align-items-center mb-lg-1 mb-4">
-						<div class="mr-5 d-flex flex-column text-muted">Remaining Amount <span class="text-danger fsz-18 mt-1"><span id="atmMint">3999</span> / <span id="maxMint">3999</span></span></div>
-						<ins class="fsz-36 text-white d-inline-flex align-items-center mr-4">110<span class="fsz-14 text-muted ml-2">$UST</span></ins>
-						<hr>
-						<a href="# class=" d-inline-flex"><a onclick="newMinting()" class="btn btn-style">MINT</a></a>
-					</div>
-					<div class="meter">
-						<span id="meter-id" style="width: 87%"></span>
-					</div>
-				<!---	<div class="d-flex d-lg-block">
+					<div class="nft-item ml-lg-3">
+						<h2 class="title fsz-37">Minting at Randomearth on 7 Dec.</h2>
+						<div class="content-style mb-lg-5 mb-4">Bullrun Girlfriends will be listed on Randomearth and
+							Knowhere Marketplace</div>
+						<div class="timerclock d-flex align-items-center mb-lg-5 mb-4"
+							data-datetime="Dec 7, 2021 14:00 UTC">
+							<div class="item">
+								<span title="days" class="rounded days">0</span>
+								<span>Day</span>
+							</div>
+							<div class="item">
+								<span title="hours" class="rounded hours">0</span>
+								<span>Hrs</span>
+							</div>
+							<div class="item">
+								<span title="minutes" class="rounded minutes">0</span>
+								<span>Min</span>
+							</div>
+							<div class="item">
+								<span title="seconds" class="rounded seconds">0</span>
+								<span>Sec</span>
+							</div>
+						</div>
+						<div class="d-flex align-items-center mb-lg-1 mb-4">
+							<div class="mr-5 d-flex flex-column text-muted">Remaining Amount <span
+									class="text-danger fsz-18 mt-1"><span id="atmMint">3999</span> / <span
+										id="maxMint">3999</span></span></div>
+							<ins class="fsz-36 text-white d-inline-flex align-items-center mr-4">110<span
+									class="fsz-14 text-muted ml-2">$UST</span></ins>
+							<hr>
+							<a href="# class=" d-inline-flex"><a onclick="newMinting()"
+									class="btn btn-style">MINT</a></a>
+						</div>
+						<div class="meter">
+							<span id="meter-id" style="width: 87%"></span>
+						</div>
+						<!---	<div class="d-flex d-lg-block">
 						<button class="btn btn-style">
 							<span>Mint</span><i class="bx bx-right-arrow-alt"></i>
 							 <div class="spinner-grow text-success" role="status">
@@ -1241,11 +1263,11 @@ in Metaverse.
 						</button> -->
 					</div>
 				</div>
-			</div>
+		</div>
 		</section>
-	</div>
-	
-	<!-- <section id="products">
+		</div>
+
+		<!-- <section id="products">
 		<span class="paintball"></span>
 		<div class="items">
 			<article>
@@ -1286,9 +1308,9 @@ in Metaverse.
 			</article>
 		</div>
 	</section> -->
-	
-	<div class="container">
-		<!---- <section id="about-us" class="row align-items-center py-5">
+
+		<div class="container">
+			<!---- <section id="about-us" class="row align-items-center py-5">
 			<span class="paintball"></span>
 			<span class="bg-shape"></span>
 			<div class="col-lg-5 text-center">
@@ -1308,256 +1330,306 @@ in Metaverse.
 				</div>  
 			</div>
 		</section> -->
-		<section id="about" ></section>
-		<section id="history" class="row align-items-center">
-			<span class="paintball"></span>
-			<div class="col-lg-7 mb-4 mb-lg-0">
-				<h3 class="title-section text-left">About <span class="d-block mt-2">BULLRUN GIRLFRIENDS</span></h3>
-				<div class="content-style mb-5">
-					Bullrun Girlfriends is the first female NFT project on Terra, 3999 Girlfriends are here to kick ass and build the strongest NFT community . We created this project with inspiration from drag culture and to highlight the beauty of feminine traits in NFT projects at a time when male traits dominated the NFT space. Our mission is to become THE blue chip female pfp project on any blockchain, whilst supporting charities close to our community’s hearts and strengthening women and artists around the world.				</div>
-				<ul class="items">
-					<li><h4>5551<small>Minted</small></h4></li>
-					<li><h4>250+<small>Unique Attributes</small></h4></li>
-					<li><h4>Billions<small>Possible Combinations</small></h4></li>
-					<li><h4>10%<small>Donated to Charity</small></h4></li>
-				</ul>
-			</div>
-			<div class="col-lg-5"><img src="assets/img/whoare.png" style="border-radius: 10px;" alt=""></div>
-		</section>
-
-		<section id="rarity" class="py-5">
-			<span class="paintball"></span>
-			<h3 class="title-section mb-5">RARITY <span></span><small></small></h3>
-			<div class="row align-items-center">
-				<div class="col-lg-5 mb-4 mb-lg-0 text-center">
-					<div class="thumb">
-						<div class="item mb-3 mb-lg-0"><img src="assets/img/rarity_0_1.png" alt=""></div>
-						<div class="item"><img src="assets/img/rarity_1_1.png" alt=""></div>
-					</div>
+			<section id="about"></section>
+			<section id="history" class="row align-items-center">
+				<span class="paintball"></span>
+				<div class="col-lg-7 mb-4 mb-lg-0">
+					<h3 class="title-section text-left">About <span class="d-block mt-2">BULLRUN GIRLFRIENDS</span></h3>
+					<div class="content-style mb-5">
+						Bullrun Girlfriends is the first female NFT project on Terra, 3999 Girlfriends are here to kick
+						ass and build the strongest NFT community . We created this project with inspiration from drag
+						culture and to highlight the beauty of feminine traits in NFT projects at a time when male
+						traits dominated the NFT space. Our mission is to become THE blue chip female pfp project on any
+						blockchain, whilst supporting charities close to our community’s hearts and strengthening women
+						and artists around the world. </div>
+					<ul class="items">
+						<li>
+							<h4>5551<small>Minted</small></h4>
+						</li>
+						<li>
+							<h4>250+<small>Unique Attributes</small></h4>
+						</li>
+						<li>
+							<h4>Billions<small>Possible Combinations</small></h4>
+						</li>
+						<li>
+							<h4>10%<small>Donated to Charity</small></h4>
+						</li>
+					</ul>
 				</div>
-				<div class="col-lg-7">
-					<div class="content-style fsz-16 mb-5">
+				<div class="col-lg-5"><img src="assets/img/whoare.png" style="border-radius: 10px;" alt=""></div>
+			</section>
+
+			<section id="rarity" class="py-5">
+				<span class="paintball"></span>
+				<h3 class="title-section mb-5">RARITY <span></span><small></small></h3>
+				<div class="row align-items-center">
+					<div class="col-lg-5 mb-4 mb-lg-0 text-center">
+						<div class="thumb">
+							<div class="item mb-3 mb-lg-0"><img src="assets/img/rarity_0_1.png" alt=""></div>
+							<div class="item"><img src="assets/img/rarity_1_1.png" alt=""></div>
+						</div>
 					</div>
-					<h4 class="fsz-18 mb-4">250+ traits</h4>
-					<div class="lists">
-						<ul class="items">
-							<li>Backgrounds</li>
-							<li>Body</li>
-							<li>Chin</li>
-							<li>Clothes</li>
-							<li>Ear Accessories</li>
-							<li>Nose </li>
-						</ul>
-						<ul class="items">
-							<li>Eyebrows</li>
-							<li>Hair</li>
-							<li>Heads</li>
-							<li>Lips</li>
-							<li>Mouth Accessories</li>
-							<li>Skins</li>							
-						</ul>
-					</div>
-				</div>
-			</div>
-			<span class="paintball"></span>
-		</section>
-
-		<section id="roadmap"></section>
-		<section id="rarity" class="py-5 roadmap_section" style="margin-bottom: 1rem;">
-			<span class="paintball"></span>
-			<h3 class="title-section mb-5">Roadmap</h3>
-			<div class="row align-items-center">
-				<div class="col-md-3 col-1" >
-
-				</div>
-				<div class="col-md-7 col-11" id="raodmap_box_container">
-					<div class="roadmap_box" >
-						<div class="roadmap_box_image" ></div>
-						<p class="roadmap_box_title">Website Launch</p>
-						<ul class="roadmap_box_list">
-							<li>Website Launch! We will be continually updating our website with more information as the project continues to develop!
-							</li>
-						</ul>
-					</div>
-
-					<div class="roadmap_box" >
-						<div class="roadmap_box_image" ></div>
-						<p class="roadmap_box_title">Mint Goes Live
-
-						</p>
-						<ul class="roadmap_box_list">
-							<li>Mint goes live on December 7 (tentative), 2021 at 19:00 UTC.
-								
-								Welcome to the Community.
-								
-								10% of primary gross proceeds donated to charity.</li>
-						</ul>
-					</div>
-
-					<div class="roadmap_box" >
-						<div class="roadmap_box_image" ></div>
-						<p class="roadmap_box_title">Marketplace Integration
-
-						</p>
-						<ul class="roadmap_box_list">
-							<li>Available on Randomearth and Knowhere following launch - Talk is going on.
-							</li>
-						</ul>
-					</div>
-					<div class="roadmap_box" >
-						<div class="roadmap_box_image" ></div>
-						<p class="roadmap_box_title">NFT Drops
-						</p>
-						<ul class="roadmap_box_list">
-							<li>Other NFT drop competitions - individuals holding more bullrun girlfriends will have a higher chance in securing these.
-
-							</li>
-						</ul>
-					</div>
-					<div class="roadmap_box" >
-						<div class="roadmap_box_image" ></div>
-						<p class="roadmap_box_title">Build For The Future
-						</p>
-						<ul class="roadmap_box_list">
-							<li>Rebuild the world initiative: future NFT collections will contribute to the overarching theme of rebuilding the world, both online and offline, and will incorporate cryptic clues and foreshadowings into the future metaverse.
-
-							</li>
-							<li>Holders will be able to mint modular NFT pieces that contain special elements, which will not only be visually beautiful art in their own right; they will also fit together to formulate new planets, to ultimately create the foundation of the Girlfriendverse - more information to come.
-
-							</li>							
-						</ul>
-					</div>											
-				</div>
-			</div>
-			<span class="paintball"></span>
-		</section>
-
-		
-		<section id="history" class="row align-items-center team_section">
-			<span class="paintball"></span>
-			<div class="col-lg-12">
-				<h3 class="title-section text-left mb-5">The Team</h3>
-				<div class="row" >
-					<div class="col-md-3 mb-5" >
-						<img class="team_img mb-3" src="assets/img/history.png" />
-						<p class="team_name fsz-18" >Octavia</p>
-						<p class="team_position fsz-18 primary-text">Founder </p>
-					</div>
-
-					<div class="col-md-3 mb-5" >
-						<img class="team_img mb-3" src="assets/img/896.png" />
-						<p class="team_name fsz-18" >dia</p>
-						<p class="team_position fsz-18 primary-text"> Marketing</p>
-					</div>
-
-					<div class="col-md-3 mb-5" >
-						<img class="team_img mb-3" src="assets/img/939.png" />
-						<p class="team_name fsz-18" >tom</p>
-						<p class="team_position fsz-18 primary-text">Marketing</p>
-					</div>
-
-					<div class="col-md-3 mb-5" >
-						<img class="team_img mb-3" src="assets/img/111.png" />
-						<p class="team_name fsz-18" >bob</p>
-						<p class="team_position fsz-18 primary-text">Marketing</p>
-					</div>
-				</div>
-			</div>
-		</section>
-
-
-		<section id="rarity" class="py-5 faq_box" style="margin-bottom: 1rem;">
-			<span class="paintball"></span>
-			<h3 class="title-section mb-5">Frequently asked <span>questions</span></h3>
-			<div class="row align-items-center">
-
-				<div class="col-md-6" >
-					<div >
-						<button class="accordion">
-							How do I purchase a Bullrun Girlfriends NFT?
-						
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="rotate-0 h-6 w-6 transform" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-						</button>
-						<div class="panel">
-							<p>On release the Mint function will take you to a standalone page where you can connect your wallet and mint a girlfriend NFT. We are trying to structure our distribute to be as fair as possible, with live minting & instant distribution. Please note that – if the Terra blockchain gets clogged – it could take a while to receive your NFT.</p>
+					<div class="col-lg-7">
+						<div class="content-style fsz-16 mb-5">
+						</div>
+						<h4 class="fsz-18 mb-4">250+ traits</h4>
+						<div class="lists">
+							<ul class="items">
+								<li>Backgrounds</li>
+								<li>Body</li>
+								<li>Chin</li>
+								<li>Clothes</li>
+								<li>Ear Accessories</li>
+								<li>Nose </li>
+							</ul>
+							<ul class="items">
+								<li>Eyebrows</li>
+								<li>Hair</li>
+								<li>Heads</li>
+								<li>Lips</li>
+								<li>Mouth Accessories</li>
+								<li>Skins</li>
+							</ul>
 						</div>
 					</div>
 				</div>
+				<span class="paintball"></span>
+			</section>
 
-				<div class="col-md-6" >
-					<div >
-						<button class="accordion">
-							How many NFTs will be sold?
-						
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="rotate-0 h-6 w-6 transform" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-						</button>
-						<div class="panel">
-							<p>3999</p>
-						</div>
+			<section id="roadmap"></section>
+			<section id="rarity" class="py-5 roadmap_section" style="margin-bottom: 1rem;">
+				<span class="paintball"></span>
+				<h3 class="title-section mb-5">Roadmap</h3>
+				<div class="row align-items-center">
+					<div class="col-md-3 col-1">
+
 					</div>
-				</div>
+					<div class="col-md-7 col-11" id="raodmap_box_container">
+						<div class="roadmap_box">
+							<div class="roadmap_box_image"></div>
+							<p class="roadmap_box_title">Website Launch</p>
+							<ul class="roadmap_box_list">
+								<li>Website Launch! We will be continually updating our website with more information as
+									the project continues to develop!
+								</li>
+							</ul>
+						</div>
 
-				<div class="clear" ></div>
-
-				<div class="col-md-6" >
-					<div >
-						<button class="accordion">
-							How can you ensure distribution is random?
-						
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="rotate-0 h-6 w-6 transform" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-						</button>
-						<div class="panel">
-							<p>Bullrun Girlfriends willbe distributed using a smart contract stationed on the Terra blockchain, which can be verified and audited by the Terra(Luna) core devs.
+						<div class="roadmap_box">
+							<div class="roadmap_box_image"></div>
+							<p class="roadmap_box_title">Mint Goes Live
 
 							</p>
+							<ul class="roadmap_box_list">
+								<li>Mint goes live on December 7 (tentative), 2021 at 19:00 UTC.
+
+									Welcome to the Community.
+
+									10% of primary gross proceeds donated to charity.</li>
+							</ul>
+						</div>
+
+						<div class="roadmap_box">
+							<div class="roadmap_box_image"></div>
+							<p class="roadmap_box_title">Marketplace Integration
+
+							</p>
+							<ul class="roadmap_box_list">
+								<li>Available on Randomearth and Knowhere following launch - Talk is going on.
+								</li>
+							</ul>
+						</div>
+						<div class="roadmap_box">
+							<div class="roadmap_box_image"></div>
+							<p class="roadmap_box_title">NFT Drops
+							</p>
+							<ul class="roadmap_box_list">
+								<li>Other NFT drop competitions - individuals holding more bullrun girlfriends will have
+									a higher chance in securing these.
+
+								</li>
+							</ul>
+						</div>
+						<div class="roadmap_box">
+							<div class="roadmap_box_image"></div>
+							<p class="roadmap_box_title">Build For The Future
+							</p>
+							<ul class="roadmap_box_list">
+								<li>Rebuild the world initiative: future NFT collections will contribute to the
+									overarching theme of rebuilding the world, both online and offline, and will
+									incorporate cryptic clues and foreshadowings into the future metaverse.
+
+								</li>
+								<li>Holders will be able to mint modular NFT pieces that contain special elements, which
+									will not only be visually beautiful art in their own right; they will also fit
+									together to formulate new planets, to ultimately create the foundation of the
+									Girlfriendverse - more information to come.
+
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
+				<span class="paintball"></span>
+			</section>
 
 
-				<div class="col-md-6" >
-					<div >
-						<button class="accordion">
-							Is each Girlfriends unique?
-						
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="rotate-0 h-6 w-6 transform" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-						</button>
-						<div class="panel">
-							<p>Each Bullrun Girlfriend NFT is unique and powerful in her own way. While some may be more powerful than others, our meticulous design and coding ensures that every NFT is unique, and no Bullrun Girlfriend can ever be replicated.</p>
+			<section id="history" class="row align-items-center team_section">
+				<span class="paintball"></span>
+				<div class="col-lg-12">
+					<h3 class="title-section text-left mb-5">The Team</h3>
+					<div class="row">
+						<div class="col-md-3 mb-5">
+							<img class="team_img mb-3" src="assets/img/history.png" />
+							<p class="team_name fsz-18">Octavia</p>
+							<p class="team_position fsz-18 primary-text">Founder </p>
+						</div>
+
+						<div class="col-md-3 mb-5">
+							<img class="team_img mb-3" src="assets/img/896.png" />
+							<p class="team_name fsz-18">dia</p>
+							<p class="team_position fsz-18 primary-text"> Marketing</p>
+						</div>
+
+						<div class="col-md-3 mb-5">
+							<img class="team_img mb-3" src="assets/img/939.png" />
+							<p class="team_name fsz-18">tom</p>
+							<p class="team_position fsz-18 primary-text">Marketing</p>
+						</div>
+
+						<div class="col-md-3 mb-5">
+							<img class="team_img mb-3" src="assets/img/111.png" />
+							<p class="team_name fsz-18">bob</p>
+							<p class="team_position fsz-18 primary-text">Marketing</p>
 						</div>
 					</div>
 				</div>
+			</section>
 
 
-				<div class="col-md-6" >
-					<div >
-						<button class="accordion">
-							What can I do with my Bullrun Girlfriend NFT?
-						
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="rotate-0 h-6 w-6 transform" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-						</button>
-						<div class="panel">
-							<p>Most Bullrun Girlfriend NFTs are randomly generated from a collection of attributes created by our artists.  Each NFT is unique, and non-fungible – this means they have only one account holder & are cryptographically signed.
+			<section id="rarity" class="py-5 faq_box" style="margin-bottom: 1rem;">
+				<span class="paintball"></span>
+				<h3 class="title-section mb-5">Frequently asked <span>questions</span></h3>
+				<div class="row align-items-center">
 
-								A select few Bullrun Girlfriend have been individually and carefully crafted as originals – look out for these – they’re #VeryRare.</p>
+					<div class="col-md-6">
+						<div>
+							<button class="accordion">
+								How do I purchase a Bullrun Girlfriends NFT?
+
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+									stroke="currentColor" class="rotate-0 h-6 w-6 transform" aria-hidden="true">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+										d="M19 9l-7 7-7-7"></path>
+								</svg>
+							</button>
+							<div class="panel">
+								<p>On release the Mint function will take you to a standalone page where you can connect
+									your wallet and mint a girlfriend NFT. We are trying to structure our distribute to
+									be as fair as possible, with live minting & instant distribution. Please note that –
+									if the Terra blockchain gets clogged – it could take a while to receive your NFT.
+								</p>
+							</div>
 						</div>
 					</div>
+
+					<div class="col-md-6">
+						<div>
+							<button class="accordion">
+								How many NFTs will be sold?
+
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+									stroke="currentColor" class="rotate-0 h-6 w-6 transform" aria-hidden="true">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+										d="M19 9l-7 7-7-7"></path>
+								</svg>
+							</button>
+							<div class="panel">
+								<p>3999</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="clear"></div>
+
+					<div class="col-md-6">
+						<div>
+							<button class="accordion">
+								How can you ensure distribution is random?
+
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+									stroke="currentColor" class="rotate-0 h-6 w-6 transform" aria-hidden="true">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+										d="M19 9l-7 7-7-7"></path>
+								</svg>
+							</button>
+							<div class="panel">
+								<p>Bullrun Girlfriends willbe distributed using a smart contract stationed on the Terra
+									blockchain, which can be verified and audited by the Terra(Luna) core devs.
+
+								</p>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="col-md-6">
+						<div>
+							<button class="accordion">
+								Is each Girlfriends unique?
+
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+									stroke="currentColor" class="rotate-0 h-6 w-6 transform" aria-hidden="true">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+										d="M19 9l-7 7-7-7"></path>
+								</svg>
+							</button>
+							<div class="panel">
+								<p>Each Bullrun Girlfriend NFT is unique and powerful in her own way. While some may be
+									more powerful than others, our meticulous design and coding ensures that every NFT
+									is unique, and no Bullrun Girlfriend can ever be replicated.</p>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="col-md-6">
+						<div>
+							<button class="accordion">
+								What can I do with my Bullrun Girlfriend NFT?
+
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+									stroke="currentColor" class="rotate-0 h-6 w-6 transform" aria-hidden="true">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+										d="M19 9l-7 7-7-7"></path>
+								</svg>
+							</button>
+							<div class="panel">
+								<p>Most Bullrun Girlfriend NFTs are randomly generated from a collection of attributes
+									created by our artists. Each NFT is unique, and non-fungible – this means they have
+									only one account holder & are cryptographically signed.
+
+									A select few Bullrun Girlfriend have been individually and carefully crafted as
+									originals – look out for these – they’re #VeryRare.</p>
+							</div>
+						</div>
+					</div>
+
 				</div>
+				<span class="paintball mobile_hide"></span>
+			</section>
 
-			</div>
-			<span class="paintball mobile_hide"></span>
-		</section>
 
-		
 
-	</div>
-</main>
+		</div>
+	</main>
 
-<footer id="siteFoot">
-	<span class="paintball"></span>
-	<div class="container">
-		
-		<!-- <section class="newsletters d-flex align-items-center justify-content-center">
+	<footer id="siteFoot">
+		<span class="paintball"></span>
+		<div class="container">
+
+			<!-- <section class="newsletters d-flex align-items-center justify-content-center">
 			<span class="paintball"></span>
 			<h4 class="fsz-24 mb-4"><span class="primary-text">Join us </span>for our Newsletter</h4>
 			<p class="lh-30 text-muted mb-5 text-center">
@@ -1570,35 +1642,36 @@ in Metaverse.
 		</section> -->
 
 
-		<aside>
-			<div class="logo mb-5">
-				<span class="paintball mobile_hide"></span>
-				<img id="bottom_logo" src="assets/img/logoText.png" alt="">
-			</div>
-			<div class="socials mt-3 mb-5">
-				<!-- <a href="#"><i class="bx bxl-facebook"></i></a>
+			<aside>
+				<div class="logo mb-5">
+					<span class="paintball mobile_hide"></span>
+					<img id="bottom_logo" src="assets/img/logoText.png" alt="">
+				</div>
+				<div class="socials mt-3 mb-5">
+					<!-- <a href="#"><i class="bx bxl-facebook"></i></a>
 				<a href="#"><i class="bx bxl-twitter"></i></a>
 				<a href="#"><i class="bx bxl-instagram-alt"></i></a>
 				<a href="#"><i class="bx bxl-linkedin-square"></i></a>
 				<a href="#"><i class="bx bxl-pinterest"></i></a> -->
-			</div>
-			<ul class="menu">
-				<li><a href="#mint">Mint</a></li>
-				<li><a href="#about">About</a></li>
-				<li><a href="#rarity">Rarity</a></li>
-				<li><a href="#roadmap">Roadmap</a></li>
-			</ul>
-		</aside>
-	</div>
-	<div id="copyright" class="py-4 mt-4 text-center">&copy; 2020 Bullrun Girlfriends . All right reserved</div>
-</footer>
+				</div>
+				<ul class="menu">
+					<li><a href="#mint">Mint</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#rarity">Rarity</a></li>
+					<li><a href="#roadmap">Roadmap</a></li>
+				</ul>
+			</aside>
+		</div>
+		<div id="copyright" class="py-4 mt-4 text-center">&copy; 2020 Bullrun Girlfriends . All right reserved</div>
+	</footer>
 
-<nav id="mmenu" class="mm-ocd" data-mm-spn-title="Title of Menu">
-	<ul>
-		<li><a href="#">Menu</a></li>
-	</ul>
-</nav>
+	<nav id="mmenu" class="mm-ocd" data-mm-spn-title="Title of Menu">
+		<ul>
+			<li><a href="#">Menu</a></li>
+		</ul>
+	</nav>
 
-<script id="requirejs" src="assets/js/vendor/require.js" data-main="assets/js/script" data-ajax=""></script>
+	<script id="requirejs" src="assets/js/vendor/require.js" data-main="assets/js/script" data-ajax=""></script>
 </body>
+
 </html>
