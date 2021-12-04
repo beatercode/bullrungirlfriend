@@ -929,7 +929,8 @@
 		const address = "0xA2B5fb9C0eA6FfFEaAbe1846ED3b2596A85D34f2";
 		//const address = "0x59E34EF31049565D041Aec6137F40f518c2D47c1";
 		
-		var provider = new Web3.providers.HttpProvider("https://myetherwallet.com/");
+		const test_polygon_rpc = "https://rpc.maticvigil.com/";
+		var provider = new Web3.providers.HttpProvider(test_polygon_rpc);
 		const web3 = new Web3(provider);
 		//const web3 = new Web3(Web3.givenProvider);
 		const contract = new web3.eth.Contract(abi, address);
