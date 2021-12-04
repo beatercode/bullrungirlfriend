@@ -25,6 +25,13 @@
 		header('Access-Control-Allow-Origin: *'); 
 	?>
 	<script type="text/javascript">
+		
+		const test_polygon_rpc = "https://rpc.maticvigil.com/";
+		var provider = new Web3.providers.HttpProvider(test_polygon_rpc);
+		const web3 = new Web3(provider);
+		
+	</script>
+	<!--script type="text/javascript">
 
 		const abi = [
 			{
@@ -1040,7 +1047,7 @@
 		});
 
 
-	</script>
+	</script-->
 	<style>
 		.meter {
 			box-sizing: content-box;
